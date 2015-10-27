@@ -1,5 +1,4 @@
 var React = require('react');
-var Radium = require('radium');
 var $ = require('jquery');
 var AppDispatcher = require('../flux/Dispatcher');
 //require jquery and use it to send post request
@@ -75,13 +74,13 @@ var SignUp = React.createClass({
          <div>
            <form onSubmit={this.handleSubmit}>
              <label>Sign Up</label>
-             <input type="text" placeholder= "username" style={styles.input1}>
+             <input type="text" placeholder= "username">
                {this.props.children}
                </input>
-             <input type="password" placeholder= "password" style={styles.input2}>
+             <input type="password" placeholder= "password">
                {this.props.children}
                </input>
-             <button style={styles.base}>
+             <button>
                {this.props.children}Submit</button>
            </form>   
            <form onSubmit={this.handleSubmitEvent}>
@@ -114,44 +113,6 @@ var SignUp = React.createClass({
  }
 });
 
-//Radium in-line styling
-var styles = {
-  base: {
-    background: 'steelblue',
-    border: 0,
-    borderRadius: 8,
-    color: 'black',
-    padding: '.4% .8% .4% .8%',
-    margin: '0 0 0 .5%',
-    fontFamily: 'Verdana',
 
-    ':hover': {
-      backgroundColor: 'powderblue'
-    },
 
-    ':focus': {
-      backgroundColor: 'steelblue'
-    },
-
-    ':active': {
-      backgroundColor: 'midnightblue'
-    },
-  },
-
-  input1: {
-    backgroundColor: 'seashell',
-    color: 'black',
-    borderRadius: 6,
-    margin: '.2% .7% .2% .7%',
-    padding: '.3%',
-  },
-
-    input2: {
-    backgroundColor: 'seashell',
-    color: 'black',
-    borderRadius: 6,
-    padding: '.3%',
-   }
-};
-
-module.exports = Radium(SignUp);
+module.exports = SignUp;

@@ -11,19 +11,22 @@ var Radium = require('radium');
 var App = React.createClass({
   render: function(){
     return (
-      <div style={styles.base}>
+      <div id="main">
       {this.props.children}
         <div>
           <TopBox/>
         </div>
 
+        <div>
+           <CategoryBar/>
+         </div>
         <br></br>
 
         <div>
           <Map/>
         </div>
         
-        <h1 style={styles.eventList}>
+        <h1>
           Event List
         </h1>
         <div>
@@ -38,9 +41,6 @@ var App = React.createClass({
     );
   }
 });
-        // <div>
-        //   <CategoryBar/>
-        // </div>
 
         // <div>
         //   <SearchBar/>
@@ -50,15 +50,6 @@ var App = React.createClass({
 App = Radium(App);
 
 //Radium in-line styling
-var styles = {
-  base: {
-    fontFamily: 'Verdana'
-  },
-  eventList: {
-    padding: '1% 0 1% 0',
-    margin: '0 0 0 43%'
-  }
-};
 
 React.render(<App/>, document.getElementById('main'));
 

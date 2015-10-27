@@ -1,7 +1,6 @@
 var React = require('react');
 // var Marker = require('./Marker');
 var GoogleMap = require('google-map-react');
-var Radium = require('radium');
 var $ = require('jquery');
 var AppDispatcher = require('../flux/Dispatcher');
 var api = require('../flux/api');
@@ -15,6 +14,14 @@ var freedayMarker;
 var Map = React.createClass({
   userClick: function(){
       alert("You are here.");
+  },
+
+  createMapOptions: function(maps) {
+    return {
+      panControl: false,
+      mapTypeControl: false,
+      scrollwheel: false
+    }
   },
 
   getInitialState: function() {
@@ -106,7 +113,7 @@ var Map = React.createClass({
       eventArray.push(<div lat={lat} lng={lng}>
         
         <MarkerModal singleEvent={events[i]} key={i} num={i}>
-        <img src={meetupMarker} alt="MEETUP" height="30" width="30" style={styles.meetup}/>
+        <img src={meetupMarker} alt="MEETUP" height="30" width="30" />
         </MarkerModal>
 
       </div>)
@@ -114,13 +121,13 @@ var Map = React.createClass({
   }
 
     return (
-      <div style={styles.base}>
+      <div>
       {this.props.children}
         <div className="container-fluid">
           <div className="row">
-            <div className="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div id="map" className="col-xs-12 col-sm-8">
               <GoogleMap 
-                style={styles.map}
+                options={this.createMapOptions} 
                 center={this.state.center}
                 zoom={this.state.zoom}>
                 <div lat={this.state.center[0]} lng={this.state.center[1]}>
@@ -136,26 +143,5 @@ var Map = React.createClass({
   },
 });
 
-//Radium in-line styling
-var styles = {
-  map: {
-    height: 10,
-    width: 20
-  },
-
-  base: {
-    background: 'steelblue',
-    border: 0,
-    borderRadius: 8,
-    color: 'black',
-    padding: '.5%',
-    fontFamily: 'Verdana',
-  },
-  meetup:{
-    borderRadius: 100,
-    background: '#e51937'
-  }
-
-};
 
 module.exports = Map;
