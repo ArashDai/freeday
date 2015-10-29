@@ -1,3 +1,4 @@
+
 var React = require('react');
 var $ = require('jquery');
 var Modal = require('react-modal');
@@ -5,6 +6,7 @@ var Modal = require('react-modal');
 
 
 var LogIn = React.createClass({//For users logging into app. Will feed into TopBox component. Needs authorization/authentication.
+
   getInitialState:function(){
     return { modalIsOpen: false, value: "Login Something Something" };
 
@@ -22,37 +24,22 @@ var LogIn = React.createClass({//For users logging into app. Will feed into TopB
     },
 
   handleSubmit:function(e){
+
     e.preventDefault();
     var userInput = {};
     var LoginDom = React.findDOMNode(this);
     
-    userInput.username = LoginDom.firstChild.children[1].value;
-    userInput.password = LoginDom.firstChild.children[2].value;
-    
+    userInput.username = $('#username2').val();
+    userInput.password = $('#password2').val();
+   
     var jsonifiedInput = JSON.stringify(userInput);
     var _this = this;
 
-    $.ajax({
-      url:"/login",
-      type:"POST",
-      data:jsonifiedInput,
-      datatype:'json' ,
-      contentType:'application/json',
-
-      success: function(token){
-        
-        _this.setState({Authorization:"Bearer "+token})
-
-        localStorage.Authorization = _this.state.Authorization
-
-        console.log("this is the something that i am looking for: ",token);
-        
-      },
-      error: function(xhr,ajaxOptions,err){
-        alert("error",err);
-        console.log(err);
-        console.log(xhr.status);
-      }
+    $.post('/login', userInput, function () {
+      console.log('hello');
+      localStorage.setItem('jwt', jwt);
+      location.reload();
+      userInput = {};
     });
 
    }, 
@@ -84,6 +71,7 @@ var LogIn = React.createClass({//For users logging into app. Will feed into TopB
 
       return (
         <div> 
+
           <button type="default-primary" onClick={this.openModal} >
       {this.props.children}LogIn</button>
             <Modal className="col-xs-12 col-sm-6 col-sm-offset-3"
@@ -92,20 +80,17 @@ var LogIn = React.createClass({//For users logging into app. Will feed into TopB
             >
            
           <button className="col-xs-offset-11" onClick={this.closeModal}>Close</button> 
-            <br></br>
-            <br></br>
-            <br></br>
-            <form onSubmit={this.handleSubmit} className="col-xs-offset-3">
-              <input type="text" placeholder= "username" >
+
+            <form onSubmit={this.handleSubmit2} className="col-xs-offset-3">
+              <input type="text" placeholder= "username" id="username2">
                 {this.props.children}
               </input>
-              <input type="password" placeholder= "password" >
+              <input type="password" placeholder= "password" id="password2">
                 {this.props.children}
               </input>
-              <button className="col-xs-offset-1" > {this.props.children}Submit</button>
+              <button className="col-xs-offset-1" type="submit"> {this.props.children}Submit</button>
             </form>
 
-          
               
               <br></br>
               <div className='row col-xs-offset-4'>

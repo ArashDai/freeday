@@ -26,7 +26,7 @@ app.use(session({resave: false,
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(router);
+// app.use(require('./routes/events.routes.js'));
 app.use(passport.initialize());
 app.use(express.static('client'));//should serve index.html page.
 require('./db/passport');
@@ -87,5 +87,4 @@ console.log('Connected');
 
 app.listen(3000);
 
-module.exports = router;
 

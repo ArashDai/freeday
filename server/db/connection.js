@@ -5,5 +5,4 @@ var sequelize = new Sequelize('postgres://postgres:password@localhost:5432/freed
 //arash's connection string plz dont delete 
 //'postgres://postgres:password@localhost:5432/freedayDB'
 
-
 module.exports = sequelize;

@@ -1,3 +1,4 @@
+
 var React = require('react');
 var $ = require('jquery');
 var AppDispatcher = require('../flux/Dispatcher');
@@ -11,50 +12,24 @@ var SignUp = React.createClass({
    };
  },
 
- componentDidMount: function() {
-   // console.log(AppDispatcher.handleLogin());
-   // console.log(localStorage.jwt);
- },
-
- handleSubmit:function(e){
-   e.preventDefault();
-   var userInput = {};
-   var signUpDom = React.findDOMNode(this);
-   userInput.username = signUpDom.firstChild.children[1].value;
-   userInput.password = signUpDom.firstChild.children[2].value;
-
-   this.setState({
-     userInput: userInput
-   });
-   console.log(userInput);
+  handleSubmit:function(e){
+    e.preventDefault();
+    var userInput = {};
+    var signUpDom = React.findDOMNode(this);
+    userInput.username = $('#username').val();
+    userInput.password = $('#password').val();
    
-   var jsonifiedInput = JSON.stringify(userInput);
-   //the json.stringify sends the correct form
-  
-   var _this = this;
-   $.ajax({
-     url:"/signup",
-     type:"POST",
-     data:jsonifiedInput,
-     datatype:'json' ,
-     contentType:'application/json',
+    $.post('/signup', userInput, function () {
+      localStorage.setItem('jwt', jwt);
+      location.reload();
+      userInput = {};
+    });
+  },
 
-     success: function(jwt){
-       localStorage.setItem('jwt', jwt);
-       location.reload();
-     },
-     error: function(xhr,ajaxOptions,err){
-       alert("error",err);
-       console.log(err);
-       console.log(xhr.status);
-     }
-   });
- },
-
- handleLogout: function () {
-   delete localStorage.jwt;
-   location.reload();
- },
+  handleLogout: function () {
+    delete localStorage.jwt;
+    location.reload();
+  },
 
   handleSubmitEvent: function () {
    var userEvent = {};
@@ -67,50 +42,52 @@ var SignUp = React.createClass({
    });
  },
 
-    render: function(){
-        
-   // if (!localStorage.token && !localStorage.jwt) {
-       return ( 
-         <div>
-           <form onSubmit={this.handleSubmit}>
-             <label>Sign Up</label>
-             <input type="text" placeholder= "username">
-               {this.props.children}
-               </input>
-             <input type="password" placeholder= "password">
-               {this.props.children}
-               </input>
-             <button>
-               {this.props.children}Submit</button>
-           </form>   
-           <form onSubmit={this.handleSubmitEvent}>
-                      <input type ='text' placeholder='Event Name' id='name'/>
-                        <br></br>
-                        <br></br>
-                        <input type ='text' placeholder='Event Description' id='description'/>
-                        <br></br>
-                        <br></br>
-                      <input type ='text' placeholder='Event Address' id='location'/>
-                          <br></br>
-                          <h4>Event Time: </h4>
-                          <input type="datetime-local" name="eventtime" id='time'/>
-                          <br></br>
-                          <br></br>
-                        <br></br>
-                          <button type="submit">
-                          Create Event
-                          </button>
-           </form>
-         </div>  
-       )
-   //   }else{
-   //   return (
-   //     <div>
-   //       <button onClick={this.handleLogout}>Logout</button>
-   //     </div>
-   //   )
-   // }
- }
+	render: function(){
+		
+    // if (!localStorage.token && !localStorage.jwt) {
+        return ( 
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              <label>Sign Up</label>
+              <input type="text" placeholder= "username" id= "username" style={styles.input1}>
+                {this.props.children}
+                </input>
+              <input type="password" placeholder= "password" id="password" style={styles.input2}>
+                {this.props.children}
+                </input>
+              <button style={styles.base}>
+                {this.props.children}Submit</button>
+            </form> 
+
+            <form onSubmit={this.handleSubmitEvent}>
+                       <input type ='text' placeholder='Event Name' id='name'/>
+                         <br></br>
+                         <br></br>
+                         <input type ='text' placeholder='Event Description' id='description'/>
+                         <br></br>
+                         <br></br>
+                       <input type ='text' placeholder='Event Address' id='location'/>
+                           <br></br>
+                           <h4>Event Time: </h4>
+                           <input type="datetime-local" name="eventtime" id='time'/>
+                           <br></br>
+                           <br></br>
+                         <br></br>
+                           <button type="submit">
+                           Create Event
+                           </button>
+            </form>
+          </div>  
+        )
+    //   }else{
+    //   return (
+    //     <div>
+    //       <button onClick={this.handleLogout}>Logout</button>
+    //     </div>
+    //   )
+    // }
+  }
+
 });
 
 
