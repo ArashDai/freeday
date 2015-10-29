@@ -24,12 +24,12 @@ var router = require('../router.js');
 
 //We are allowing requests to come from different domains in order to develop a client-independent system. If you do not allow this, you will trigger a CORS (Cross Origin Request Sharing) error in the web browser. not sure if we need any of that stuff for the jot^^^^^^^
 
-app.configure(function(){
-  app.use(express.static('public')); //not sure if we need this one
-  app.use(express.bodyParser());
-  app.use(passport.initialize());
-  app.use(app.router);
-});
+// app.configure(function(){
+//   app.use(express.static('public')); //not sure if we need this one
+//   app.use(express.bodyParser());
+//   app.use(passport.initialize());
+//   app.use(app.router);
+// });
 
 //passport.initialize() middleware is required to initialize Passport
 

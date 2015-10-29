@@ -30,7 +30,7 @@ var CreateEvent = React.createClass({
         <div>
           <button type="default-primary" onClick={this.openModal} >
       {this.props.children}Create Event</button>
-          <Modal
+          <Modal id="loginModal"
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal} 
           >

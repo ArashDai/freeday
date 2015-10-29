@@ -1,5 +1,9 @@
 #main{
-  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: 0;
+  padding-left: 0;
+
 }
 
 #map{
@@ -25,4 +29,13 @@
 }
 .categoryItem{
   height:3em;
+}
+
+
+#loginModal {
+  height: 20em;
+}
+
+.infiniteList {
+ 
 }

@@ -1,4 +1,5 @@
 var React = require('react');
+var Modal = require('react-modal');
 var CreateEvent = require('./CreateEvent');
 var SignUp = require('./SignUp');
 var LogIn = require('./LogIn');
@@ -13,15 +14,20 @@ var TopBox = React.createClass({
       {this.props.children}
       <h1 className="col-xs-6 col-xs-offset-5" ><a href=''>freeday</a></h1>
 
-      <CreateEvent/> 
+        <CreateEvent/> 
+
+        
+        <LogIn/>
+
+        
 
       </div>
 		)
 	}
 });
 
-  // <SignUp/>
-  // <LogIn/> 
+   //<SignUp/>
+   //<LogIn/> 
 
 
 

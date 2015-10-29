@@ -1,7 +1,6 @@
 var React = require('react');
 var $ = require('jquery');
 var meetup = require('../meetup.json');
-var Radium = require('radium');
 var EventInfo = require('./EventInfo');
 
 var ListItem = React.createClass({

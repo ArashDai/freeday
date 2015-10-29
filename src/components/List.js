@@ -11,6 +11,7 @@ var List = React.createClass({
       isInfiniteLoading: false,
       events: null,
       meetupJSON: [],
+      useWindowAsScrollContainer:true,
       userEvents: null
     };
   }, 
@@ -45,7 +46,7 @@ var List = React.createClass({
       var newEvent = {};
         var d = new Date(e.time);
         newEvent.name = e.name;
-        newEvent.description = e.description;//.substring stopped working
+        newEvent.description = e.description;
         newEvent.url = e.event_url;
         newEvent.distance = Math.round(e.distance) + " miles";
         // newEvent.urlName = e.group.urlname;
@@ -54,7 +55,6 @@ var List = React.createClass({
         newEvent.category;
     
       events.push(newEvent);
-      // console.log(events);
     });
     if (this.state.events.length > 0)  {
       for (var i = start; i < end; i++) {
@@ -82,7 +82,7 @@ var List = React.createClass({
 
     elementInfiniteLoad: function() {
         return (
-        <div className="infinite-list-item">
+        <div className="infinite-list-item ">
             Loading Events...
         </div>
       )
@@ -90,18 +90,18 @@ var List = React.createClass({
 
     render: function() {
 
-      // var meetupEventList = this.state.events;
-      // console.log(meetupEventList);
-      
         return (
-          <Infinite elementHeight={150}
-             containerHeight={500}
-             infiniteLoadBeginBottomOffset={15}
-             onInfiniteLoad={this.handleInfiniteLoad}
-             loadingSpinnerDelegate={this.elementInfiniteLoad()}
-             isInfiniteLoading={this.state.isInfiniteLoading}>
-          {this.state.elements}
-        </Infinite>
+        
+          <Infinite
+            elementHeight={150}
+            containerHeight={500}
+            infiniteLoadBeginBottomOffset={15}
+            onInfiniteLoad={this.handleInfiniteLoad}
+            loadingSpinnerDelegate={this.elementInfiniteLoad()}
+            isInfiniteLoading={this.state.isInfiniteLoading}>
+                {this.state.elements}
+          </Infinite>
+              
       )
     }
 });

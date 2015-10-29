@@ -6,37 +6,27 @@ var BottomBox = require('./components/BottomBox');
 var List = require('./components/List');
 var Map = require('./components/Map');
 // var Tab = require('./components/Tab');
-var Radium = require('radium');
+
 
 var App = React.createClass({
   render: function(){
     return (
-      <div id="main">
-      {this.props.children}
-        <div>
-          <TopBox/>
-        </div>
-
-        <div>
-           <CategoryBar/>
-         </div>
-        <br></br>
-
-        <div>
-          <Map/>
-        </div>
+      <div>
         
-        <h1>
-          Event List
-        </h1>
-        <div>
-          <List/>
-        </div>
+        {this.props.children}
+        
+        <TopBox/>
+      
+        <CategoryBar/>
+      
+        <Map/>
 
-        <div>
-          <BottomBox/>
-        </div>
-
+        <h1 className='col-xs-offset-6 col-sm-offset-1'>Upcoming Events</h1>
+        
+        <List/>
+        
+        <BottomBox/>
+        
       </div>
     );
   }
@@ -47,7 +37,7 @@ var App = React.createClass({
         //   <br></br>
         // </div> 
 
-App = Radium(App);
+//App = Radium(App);
 
 //Radium in-line styling
 

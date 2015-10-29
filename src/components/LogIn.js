@@ -1,8 +1,26 @@
 var React = require('react');
-var Radium = require('radium');
 var $ = require('jquery');
+var Modal = require('react-modal');
+
+
 
 var LogIn = React.createClass({//For users logging into app. Will feed into TopBox component. Needs authorization/authentication.
+  getInitialState:function(){
+    return { modalIsOpen: false, value: "Login Something Something" };
+
+  },
+  openModal: function() {
+        this.setState({modalIsOpen: true});
+  },
+
+  closeModal: function() {
+      this.setState({modalIsOpen: false});
+  },
+
+  handleChange: function(event){
+      this.setState({value: event.target.value});
+    },
+
   handleSubmit:function(e){
     e.preventDefault();
     var userInput = {};
@@ -66,20 +84,35 @@ var LogIn = React.createClass({//For users logging into app. Will feed into TopB
 
       return (
         <div> 
-          <label>Log In </label>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" placeholder= "username" >
-              {this.props.children}
-            </input>
-            <input type="password" placeholder= "password" >
-              {this.props.children}
-            </input>
-          </form>
+          <button type="default-primary" onClick={this.openModal} >
+      {this.props.children}LogIn</button>
+            <Modal className="col-xs-12 col-sm-6 col-sm-offset-3"
+              isOpen={this.state.modalIsOpen}
+              onRequestClose={this.closeModal} 
+            >
+           
+          <button className="col-xs-offset-11" onClick={this.closeModal}>Close</button> 
+            <br></br>
+            <br></br>
+            <br></br>
+            <form onSubmit={this.handleSubmit} className="col-xs-offset-3">
+              <input type="text" placeholder= "username" >
+                {this.props.children}
+              </input>
+              <input type="password" placeholder= "password" >
+                {this.props.children}
+              </input>
+              <button className="col-xs-offset-1" > {this.props.children}Submit</button>
+            </form>
 
-              <button > {this.props.children}Submit</button>
+          
+              
               <br></br>
-              <a href="/auth/facebook" class="btn btn-primary" ><span class="fa fa-facebook"></span> Facebook</a>
-              <button >{this.props.children}G-Mail</button>
+              <div className='row col-xs-offset-4'>
+                <a href="/auth/facebook" className="btn btn-primary" ><span className="fa fa-facebook"></span> Facebook</a>
+                <button className="btn btn-primary">{this.props.children}G-Mail</button>
+              </div>
+            </Modal>
         </div>
       )
    
@@ -87,4 +120,4 @@ var LogIn = React.createClass({//For users logging into app. Will feed into TopB
 });
 
 
-module.exports = Radium(LogIn);
+module.exports = LogIn;

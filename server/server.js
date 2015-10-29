@@ -10,7 +10,7 @@ var User = require('./db/models/user');
 var passport = require('passport');
 var session = require('express-session');
 
-
+var authCtrl = require('./auth/auth.js');
 var eventCtrl =  require('./controllers/event.controller');
 
 router.post('/post', eventCtrl.postEvent);
@@ -38,6 +38,9 @@ require('./db/db');
 // passport.deserializeUser(function(user, done) {
 //   done(null, user);
 // });
+
+// make renderMap module
+//app.get('/map', renderMap);
 
 app.get('/map', function(req, res) {
   request.get('https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=' + config.googleMapApi.key, 
